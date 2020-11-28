@@ -12,6 +12,8 @@ namespace IIS.Engine
         private const string ConnectionString =
             "Server=dbsys.cs.vsb.cz\\STUDENT;Database=fer0101;User ID=fer0101;Password=aZ1kPBvC9x;";
 
+        private const string Schema = "IIS.";
+        
         private readonly SqlConnection _connection = new SqlConnection(ConnectionString);
 
         public override T LoadOne()
@@ -65,9 +67,14 @@ namespace IIS.Engine
         {
             foreach (var property in typeof(T).GetProperties())
             {
-                var value = property.GetValue(this, null);
-                if (value != null)
+                var value = property.GetValue(Model, null);
+                if (!PropertyIsNotMapped(property) && value != null)
                 {
+                    // if (property.PropertyType == typeof(DateTime?))
+                    // {
+                    //     value = FormatDateTimeString(value.ToString());
+                    // }
+                    
                     command.Parameters.AddWithValue("@" + property.Name, value);
                 }
             }
@@ -75,13 +82,13 @@ namespace IIS.Engine
 
         private string BuildSelectQueryString()
         {
-            var queryString = $"SELECT * FROM {typeof(T).Name}";
+            var queryString = $"SELECT * FROM {Schema + typeof(T).Name}";
             
             string whereString = null;
             foreach (var property in typeof(T).GetProperties())
             {
-                var value = property.GetValue(this, null);
-                if (value == null) continue;
+                var value = property.GetValue(Model, null);
+                if (value == null || PropertyIsNotMapped(property)) continue;
                 
                 whereString = whereString == null ? " WHERE " : whereString + " AND ";
                 whereString += FilterEquals(property.Name);
@@ -92,15 +99,15 @@ namespace IIS.Engine
         
         private string BuildInsertQueryString()
         {
-            var queryString = $"INSERT INTO {typeof(T).Name}";
+            var queryString = $"INSERT INTO {Schema + typeof(T).Name}";
 
             string parametersString = null;
             string valuesString = null;
             foreach (var property in typeof(T).GetProperties())
             {
-                var value = property.GetValue(this, null);
-                if ((PropertyIsKey(property) && value == null) ||
-                    !PropertyIsEditable(property) || (!PropertyIsRequired(property) && value == null)) continue;
+                var value = property.GetValue(Model, null);
+                if (PropertyIsNotMapped(property) || PropertyIsKey(property) ||
+                    !PropertyIsEditable(property) || !PropertyIsRequired(property) && value == null) continue;
                 
                 parametersString = parametersString == null ? "" : parametersString + ", ";
                 parametersString += property.Name;
@@ -114,19 +121,19 @@ namespace IIS.Engine
         
         private string BuildUpdateQueryString()
         {
-            var queryString = $"UPDATE {typeof(T).Name}";
+            var queryString = $"UPDATE {Schema + typeof(T).Name}";
 
             string setString = null;
             string whereString = null;
             foreach (var property in typeof(T).GetProperties())
             {
-                var value = property.GetValue(this, null);
+                var value = property.GetValue(Model, null);
                 if (PropertyIsKey(property))
                 {
                     whereString = whereString == null ? " WHERE " : whereString + " AND ";
                     whereString += FilterEquals(property.Name);
                 }
-                else if (PropertyIsRequired(property) || value != null)
+                else if (!PropertyIsNotMapped(property) && (PropertyIsRequired(property) || value != null))
                 {
                     setString = setString == null ? " SET " : setString + ", ";
                     setString += FilterEquals(property.Name);
@@ -138,12 +145,12 @@ namespace IIS.Engine
         
         private string BuildDeleteQueryString()
         {
-            var queryString = $"DELETE FROM {typeof(T).Name}";
+            var queryString = $"DELETE FROM {Schema + typeof(T).Name}";
             
             string whereString = null;
             foreach (var property in typeof(T).GetProperties())
             {
-                if (PropertyIsKey(property) && property.GetValue(this, null) != null)
+                if (PropertyIsKey(property) && property.GetValue(Model, null) != null)
                 {
                     whereString = whereString == null ? " WHERE " : whereString + " AND ";
                     whereString += FilterEquals(property.Name);
@@ -169,7 +176,7 @@ namespace IIS.Engine
 
                 while (reader.Read())
                 {
-                    var model = Activator.CreateInstance<T>();
+                    var model = (T)Activator.CreateInstance(typeof(T), this);
                     foreach (var property in typeof(T).GetProperties())
                     {
                         if (reader.GetSchemaTable().Rows.OfType<DataRow>()

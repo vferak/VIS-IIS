@@ -13,25 +13,37 @@ namespace IIS.Views
     {
         public MainWindow()
         {
-            //var sql = new Tasks(new MSSQL<Tasks>()) {ModelId = 5}.Connection.Load();
-            
-            
-            var task1 = new Tasks(new XML<Tasks>()){ModelId = 1}.Connection.LoadOne();
 
-            var task = new Tasks(new XML<Tasks>())
+            var test = Test(new MSSQL<Tasks>());
+
+            InitializeComponent();
+        }
+
+        private bool Test(Database<Tasks> database)
+        {
+            var task = new Tasks(database)
             {
-                ModelId = 10,
-                ClientModelId = 4,
+                ClientModelId = 2,
                 UserModelId = 2,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
                 Title = "Update úkol",
                 ExpectedTime = 50,
-                ExpectedDate = DateTime.Now
+                ExpectedDate = DateTime.Now,
+                Rate = 600
             };
+            
             task.Connection.Save();
 
-            InitializeComponent();
+            task = task.Connection.LoadOne();
+
+            task.Title = "Jsem updatnutý";
+            task.ModifiedAt = DateTime.Now;
+            task.Connection.Save();
+            
+            task.Connection.Delete();
+
+            return true;
         }
         
     }

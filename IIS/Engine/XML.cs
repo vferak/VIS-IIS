@@ -32,6 +32,7 @@ namespace IIS.Engine
         {
             if (IsInsert())
             {
+                //todo generovat key ID
                 ExecuteInsert(BuildXPathString(false));
             }
             else

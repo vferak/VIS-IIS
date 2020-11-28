@@ -20,10 +20,10 @@ namespace IIS.Models
         [Required]
         public int? UserModelId { get; set; }
         
-        [Editable(false)]
+        [Required]
         public DateTime? CreatedAt { get; set; }
 
-        [Editable(false)]
+        [Required]
         public DateTime? ModifiedAt { get; set; }
 
         [Required]
@@ -35,6 +35,7 @@ namespace IIS.Models
         [Required]
         public DateTime? ExpectedDate { get; set; }
         
+        [Required]
         public int? Rate { get; set; }
 
         public Tasks(Database<Tasks> connection) : base(connection) {}
