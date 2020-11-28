@@ -41,11 +41,11 @@
       <ModelId>5</ModelId>
       <ClientModelId>4</ClientModelId>
       <UserModelId>2</UserModelId>
-      <CreatedAt>2020-11-28 16:07:45</CreatedAt>
-      <ModifiedAt>2020-11-28 16:07:45</ModifiedAt>
+      <CreatedAt>2020-11-28 16:16:15</CreatedAt>
+      <ModifiedAt>2020-11-28 16:16:15</ModifiedAt>
       <Title>Update úkol</Title>
       <ExpectedTime>50</ExpectedTime>
-      <ExpectedDate>2020-11-28 16:07:45</ExpectedDate>
+      <ExpectedDate>2020-11-28 16:16:15</ExpectedDate>
       <Rate>600</Rate>
     </Row>
   </Tasks>
