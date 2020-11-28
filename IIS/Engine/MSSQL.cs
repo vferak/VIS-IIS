@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Reflection;
+
 
 namespace IIS.Engine
 {
@@ -14,60 +13,6 @@ namespace IIS.Engine
             "Server=dbsys.cs.vsb.cz\\STUDENT;Database=fer0101;User ID=fer0101;Password=aZ1kPBvC9x;";
 
         private readonly SqlConnection _connection = new SqlConnection(ConnectionString);
-
-        private IEnumerable<T> ExecuteReader(SqlCommand command)
-        {
-            var result = new List<T>();
-
-            try
-            {
-                _connection.Open();
-                var reader = command.ExecuteReader();
-
-                while (reader.Read())
-                {
-                    var model = Activator.CreateInstance<T>();
-                    foreach (var property in typeof(T).GetProperties())
-                    {
-                        if (reader.GetSchemaTable().Rows.OfType<DataRow>()
-                            .Any(row => row["ColumnName"].ToString() == property.Name))
-                        {
-                            var value = reader[property.Name];
-                            property.SetValue(model, Convert.IsDBNull(value) ? null : value);
-                        }
-                    }
-
-                    result.Add(model);
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                _connection.Close();
-            }
-
-            return result;
-        }
-
-        private void ExecuteNonQuery(SqlCommand command)
-        {
-            try
-            {
-                _connection.Open();
-                command.ExecuteNonQuery();
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            finally
-            {
-                _connection.Close();
-            }
-        }
 
         public override T LoadOne()
         {
@@ -100,11 +45,6 @@ namespace IIS.Engine
                 var query = BuildDeleteQueryString();
                 ExecuteNonQuery(GetSqlCommandWithParameters(query));
             }
-        }
-
-        public void RunProcedure(string procedureName)
-        {
-            ExecuteNonQuery(GetSqlCommandWithProcedure(procedureName));
         }
 
         private SqlCommand GetSqlCommandWithParameters(string query)
@@ -216,6 +156,65 @@ namespace IIS.Engine
         private string FilterEquals(string propertyName)
         {
             return propertyName + " = @" + propertyName;
+        }
+        
+        private IEnumerable<T> ExecuteReader(SqlCommand command)
+        {
+            var result = new List<T>();
+
+            try
+            {
+                _connection.Open();
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    var model = Activator.CreateInstance<T>();
+                    foreach (var property in typeof(T).GetProperties())
+                    {
+                        if (reader.GetSchemaTable().Rows.OfType<DataRow>()
+                            .Any(row => row["ColumnName"].ToString() == property.Name))
+                        {
+                            var value = reader[property.Name];
+                            property.SetValue(model, Convert.IsDBNull(value) ? null : value);
+                        }
+                    }
+
+                    result.Add(model);
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+
+            return result;
+        }
+
+        private void ExecuteNonQuery(SqlCommand command)
+        {
+            try
+            {
+                _connection.Open();
+                command.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                _connection.Close();
+            }
+        }
+        
+        public void RunProcedure(string procedureName)
+        {
+            ExecuteNonQuery(GetSqlCommandWithProcedure(procedureName));
         }
     }
 }

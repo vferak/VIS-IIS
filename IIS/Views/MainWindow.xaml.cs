@@ -20,15 +20,14 @@ namespace IIS.Views
 
             var task = new Tasks(new XML<Tasks>())
             {
-                ModelId = 5,
+                ModelId = 10,
                 ClientModelId = 4,
                 UserModelId = 2,
                 CreatedAt = DateTime.Now,
                 ModifiedAt = DateTime.Now,
                 Title = "Update úkol",
                 ExpectedTime = 50,
-                ExpectedDate = DateTime.Now,
-                Rate = 600
+                ExpectedDate = DateTime.Now
             };
             task.Connection.Save();
 

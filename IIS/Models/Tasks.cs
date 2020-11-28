@@ -35,7 +35,6 @@ namespace IIS.Models
         [Required]
         public DateTime? ExpectedDate { get; set; }
         
-        [Required]
         public int? Rate { get; set; }
 
         public Tasks(Database<Tasks> connection) : base(connection) {}

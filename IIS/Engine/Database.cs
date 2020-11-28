@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using System.Reflection.Metadata;
 
 namespace IIS.Engine
 {
@@ -56,6 +58,16 @@ namespace IIS.Engine
         {
             var attribute = (EditableAttribute) Attribute.GetCustomAttribute(property, typeof(EditableAttribute));
             return attribute == null || attribute.AllowEdit;
+        }
+        
+        protected static bool PropertyIsNotMapped(PropertyInfo property)
+        {
+            return Attribute.IsDefined(property, typeof(NotMappedAttribute));
+        }
+
+        protected string FormatDateTimeString(string dateTime)
+        {
+            return DateTime.Parse(dateTime).ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 }
