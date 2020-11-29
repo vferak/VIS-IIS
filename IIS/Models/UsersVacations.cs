@@ -6,8 +6,6 @@ namespace IIS.Models
 {
     public class UsersVacations
     {
-        public IDatabase<UsersVacations> Connection { get; set; }
-        
         [Key]
         public int? ModelId { get; set; }
 

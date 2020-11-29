@@ -6,8 +6,6 @@ namespace IIS.Models
 {
     public class Clients
     {
-        public IDatabase<Clients> Connection { get; set; }
-        
         [Key]
         public int? ModelId { get; set; }
 

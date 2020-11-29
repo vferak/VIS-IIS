@@ -4,14 +4,12 @@ using IIS.Engine;
 
 namespace IIS.Models
 {
-    public class TasksEvents
+    public class TasksEvents : Model<TasksEvents>
     {
         const string StatusEntered = "entered";
         const string StatusInProgress = "inProgress";
         const string StatusFinished = "finished";
-        
-        public IDatabase<TasksEvents> Connection { get; set; }
-        
+
         [Key]
         public int? ModelId { get; set; }
         
@@ -21,7 +19,7 @@ namespace IIS.Models
         [Required]
         public int? UserModelId { get; set; }
         
-        [Editable(false)]
+        [Required]
         public DateTime? CreatedAt { get; set; }
 
         [Required]
@@ -32,5 +30,7 @@ namespace IIS.Models
         
         [Required]
         public string Text { get; set; }
+
+        public TasksEvents(Connection connection) : base(connection) {}
     }
 }

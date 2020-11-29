@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
-using System.Reflection.Metadata;
 
 namespace IIS.Engine
 {
-    public abstract class Database<T> : IDatabase<T>
+    public abstract class Database<T>
     {
         public Model<T> Model { get; set; }
         public abstract T LoadOne();
@@ -18,10 +17,14 @@ namespace IIS.Engine
 
         public abstract void Delete();
         
+        public Database(Model<T> model)
+        {
+            Model = model;
+        }
+        
         protected bool IsInsert()
         {
-            var database = Activator.CreateInstance(GetType());
-            var model = (T)Activator.CreateInstance(typeof(T), database);
+            var model = (T)Activator.CreateInstance(typeof(T), Model.Connection);
             foreach (var property in typeof(T).GetProperties())
             {
                 if (!PropertyIsKey(property)) continue;
@@ -34,14 +37,14 @@ namespace IIS.Engine
                 property.SetValue(model, property.GetValue(Model, null));
             }
 
-            var connection = (IDatabase<T>) model?.GetType().GetProperty("Connection")?.GetValue(model);
+            var database = (Database<T>) model?.GetType().GetProperty("Database")?.GetValue(model);
 
-            if (connection == null)
+            if (database == null)
             {
                 throw new Exception("Unknown generic class");
             }
             
-            return connection.LoadOne() == null;
+            return database.LoadOne() == null;
         }
         
         protected static bool PropertyIsKey(PropertyInfo property)

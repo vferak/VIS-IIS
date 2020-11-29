@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using System.Xml;
 using IIS.Engine;
 using IIS.Models;
 
@@ -13,15 +12,16 @@ namespace IIS.Views
     {
         public MainWindow()
         {
+            var connection = new MSSQLConnection();
 
-            var test = Test(new MSSQL<Tasks>());
+            var test = Test(connection);
 
             InitializeComponent();
         }
 
-        private bool Test(Database<Tasks> database)
+        private bool Test(Connection connection)
         {
-            var task = new Tasks(database)
+            var task = new Tasks(connection)
             {
                 ClientModelId = 2,
                 UserModelId = 2,
@@ -33,15 +33,15 @@ namespace IIS.Views
                 Rate = 600
             };
             
-            task.Connection.Save();
+            task.Save();
 
-            task = task.Connection.LoadOne();
+            task = task.LoadOne();
 
             task.Title = "Jsem updatnutý";
             task.ModifiedAt = DateTime.Now;
-            task.Connection.Save();
+            task.Save();
             
-            task.Connection.Delete();
+            task.Delete();
 
             return true;
         }

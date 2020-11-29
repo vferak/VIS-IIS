@@ -13,6 +13,8 @@ namespace IIS.Engine
         private const string Root = "IIS";
         private const string Row = "Row";
 
+        public XML(Model<T> model) : base(model) {}
+        
         public override T LoadOne()
         {
             return Load().FirstOrDefault();
@@ -100,7 +102,7 @@ namespace IIS.Engine
 
             foreach (XmlNode node in xml.SelectNodes(xpath))
             {
-                var model = (T)Activator.CreateInstance(typeof(T), this);
+                var model = (T)Activator.CreateInstance(typeof(T), new XMLConnection());
                 
                 foreach (var property in typeof(T).GetProperties())
                 {

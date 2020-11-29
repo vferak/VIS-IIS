@@ -38,11 +38,11 @@ namespace IIS.Models
         [Required]
         public int? Rate { get; set; }
 
-        public Tasks(Database<Tasks> connection) : base(connection) {}
+        public Tasks(Connection connection) : base(connection) {}
 
         public int GetRealTime()
         {
-            var tasksEvents = new TasksEvents {TaskModelId = ModelId}.Connection.Load();
+            var tasksEvents = new TasksEvents(Connection) {TaskModelId = ModelId}.Load();
             return tasksEvents.Sum(tasksEvent => tasksEvent.Time.GetValueOrDefault());
         }
 

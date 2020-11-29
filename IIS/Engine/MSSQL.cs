@@ -16,6 +16,8 @@ namespace IIS.Engine
         
         private readonly SqlConnection _connection = new SqlConnection(ConnectionString);
 
+        public MSSQL(Model<T> model) : base(model) {}
+        
         public override T LoadOne()
         {
             return Load().FirstOrDefault();
@@ -176,7 +178,7 @@ namespace IIS.Engine
 
                 while (reader.Read())
                 {
-                    var model = (T)Activator.CreateInstance(typeof(T), this);
+                    var model = (T)Activator.CreateInstance(typeof(T), new MSSQLConnection());
                     foreach (var property in typeof(T).GetProperties())
                     {
                         if (reader.GetSchemaTable().Rows.OfType<DataRow>()
