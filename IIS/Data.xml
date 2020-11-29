@@ -14,6 +14,10 @@
       <Email>pferak@gmail.com</Email>
     </Row>
   </Users>
+  <UsersVacations>
+  </UsersVacations>
+  <Clients>
+  </Clients>
   <Tasks IncrementId="12">
     <Row>
       <ModelId>1</ModelId>
@@ -49,4 +53,6 @@
       <Rate>600</Rate>
     </Row>
   </Tasks>
+  <TasksEvents>
+  </TasksEvents>
 </IIS>
