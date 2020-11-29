@@ -12,7 +12,7 @@ namespace IIS.Views
     {
         public MainWindow()
         {
-            var connection = new MSSQLConnection();
+            var connection = new XMLConnection();
 
             var test = Test(connection);
 

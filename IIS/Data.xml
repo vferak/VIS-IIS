@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <IIS>
-  <Users>
+  <Users IncrementId="3">
     <Row>
       <Id>1</Id>
       <FirstName>Vojtěch</FirstName>
@@ -14,7 +14,7 @@
       <Email>pferak@gmail.com</Email>
     </Row>
   </Users>
-  <Tasks>
+  <Tasks IncrementId="12">
     <Row>
       <ModelId>1</ModelId>
       <ClientModelId>4</ClientModelId>

@@ -28,13 +28,16 @@ namespace IIS.Engine
             foreach (var property in typeof(T).GetProperties())
             {
                 if (!PropertyIsKey(property)) continue;
+
+                var keyValue = property.GetValue(Model, null);
                 
-                if (property.GetValue(Model, null) == null)
+                if (keyValue == null)
                 {
                     return true;
                 }
 
-                property.SetValue(model, property.GetValue(Model, null));
+                property.SetValue(model, keyValue);
+                break;
             }
 
             var database = (Database<T>) model?.GetType().GetProperty("Database")?.GetValue(model);

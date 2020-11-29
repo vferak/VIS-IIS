@@ -12,6 +12,7 @@ namespace IIS.Engine
         private const string FilePath = "D:\\Users\\vfera\\Documents\\000 Vojta\\VSB\\5_Semestr\\VIS\\IIS\\IIS\\IIS\\Data.xml";
         private const string Root = "IIS";
         private const string Row = "Row";
+        private const string IncrementId = "IncrementId";
 
         public XML(Model<T> model) : base(model) {}
         
@@ -93,6 +94,22 @@ namespace IIS.Engine
 
             return xml;
         }
+
+        private string GetIncrementId(XmlDocument xml, XmlNode node)
+        {
+            var incrementId = node.Attributes[IncrementId];
+            if (incrementId == null)
+            {
+                incrementId = xml.CreateAttribute(IncrementId);
+                incrementId.Value = "1";
+                node.Attributes.SetNamedItem(incrementId);
+            }
+
+            var result = incrementId.Value;
+            incrementId.Value = (int.Parse(result) + 1).ToString();
+            
+            return result;
+        }
         
         private IEnumerable<T> ExecuteReader(string xpath)
         {
@@ -131,9 +148,12 @@ namespace IIS.Engine
             
             foreach (var property in typeof(T).GetProperties())
             {
-                var value = property.GetValue(Model, null)?.ToString();
-
-                if (string.IsNullOrWhiteSpace(value) && (PropertyIsKey(property) || PropertyIsRequired(property)))
+                if (PropertyIsNotMapped(property)) continue;
+                
+                var value = PropertyIsKey(property) ? GetIncrementId(xml, node) : 
+                    property.GetValue(Model, null)?.ToString();
+                
+                if (string.IsNullOrWhiteSpace(value) && PropertyIsRequired(property))
                 {
                     throw new Exception("Required attribute is missing!");
                 }
@@ -142,8 +162,6 @@ namespace IIS.Engine
                 {
                     value = FormatDateTimeString(value);
                 }
-                
-                if (PropertyIsNotMapped(property)) continue;
 
                 var valueNode = xml.CreateNode(XmlNodeType.Element, property.Name, "");
 
