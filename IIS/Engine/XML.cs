@@ -185,24 +185,16 @@ namespace IIS.Engine
             {
                 var value = property.GetValue(Model, null)?.ToString();
 
-                if (string.IsNullOrWhiteSpace(value))
-                {
-                    if (PropertyIsKey(property) || PropertyIsRequired(property))
-                    {
-                        throw new Exception("Required attribute is missing!");
-                    }
-
-                    continue;
-                }
-
-                if (property.PropertyType == typeof(DateTime?))
-                {
-                    value = FormatDateTimeString(value);
-                }
+                if (string.IsNullOrWhiteSpace(value)) continue;
 
                 var valueNode = node.SelectSingleNode(property.Name);
 
                 if (valueNode == null) continue;
+                
+                if (property.PropertyType == typeof(DateTime?))
+                {
+                    value = FormatDateTimeString(value);
+                }
 
                 valueNode.InnerText = value;
             }

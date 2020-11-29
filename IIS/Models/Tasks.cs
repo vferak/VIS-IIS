@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using IIS.Engine;
@@ -42,7 +43,7 @@ namespace IIS.Models
 
         public int GetRealTime()
         {
-            var tasksEvents = new TasksEvents(Connection) {TaskModelId = ModelId}.Load();
+            var tasksEvents = GetTasksEvents();
             return tasksEvents.Sum(tasksEvent => tasksEvent.Time.GetValueOrDefault());
         }
 
@@ -55,6 +56,26 @@ namespace IIS.Models
         {
             var ratePerMinute = Rate / 60;
             return ratePerMinute.GetValueOrDefault() * GetRealTime();
+        }
+
+        public IEnumerable<TasksEvents> GetTasksEvents()
+        {
+            return new TasksEvents(Connection) { TaskModelId = ModelId } .Load();
+        }
+
+        public TasksEvents GetNewestEvent()
+        {
+            return GetTasksEvents().LastOrDefault();
+        }
+
+        public void AddTaskEvent(TasksEvents taskEvent)
+        {
+            taskEvent.Save();
+            
+            ModifiedAt = DateTime.Now;
+            UserModelId = taskEvent.UserModelId;
+            
+            Save();
         }
     }
 }
