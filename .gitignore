@@ -1,4 +1,7 @@
 ﻿.idea/
-.vs/
-IIS/bin/
-IIS/obj/
+DesktopApplication/bin/
+DesktopApplication/obj/
+DomainLayer/bin/
+DomainLayer/obj/
+WebApplication/bin/
+WebApplication/obj/
