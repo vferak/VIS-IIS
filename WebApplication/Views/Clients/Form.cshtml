@@ -1,0 +1,37 @@
+﻿@model DomainLayer.Models.Clients
+<div class="row">
+    <div class="col-md-12">
+        @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+    </div>
+    <div class="col-md-10 mx-auto">
+        <h2>Nový klient</h2>
+        
+        <form asp-controller="Clients" asp-action="@ViewContext.RouteData.Values["action"].ToString()" method="post">
+            <div class="form-group">
+                <input asp-for="ModelId" type="hidden"/>
+            </div>
+            <div class="form-group required">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control"/>
+            </div>
+            <div class="form-group required">
+                <label asp-for="ContactFirstName" class="control-label"></label>
+                <input asp-for="ContactFirstName" class="form-control"/>
+            </div>
+            <div class="form-group required">
+                <label asp-for="ContactLastName" class="control-label"></label>
+                <input asp-for="ContactLastName" class="form-control"/>
+            </div>
+            <div class="form-group required">
+                <label asp-for="ContactEmail" class="control-label"></label>
+                <input asp-for="ContactEmail" class="form-control"/>
+            </div>
+            <div class="form-group required">
+                <label asp-for="ContactPhoneNumber" class="control-label"></label>
+                <input asp-for="ContactPhoneNumber" class="form-control"/>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Uložit</button>
+        </form>
+    </div>
+</div>

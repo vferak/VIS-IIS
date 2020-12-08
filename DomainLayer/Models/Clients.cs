@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using IIS.Engine;
+using DomainLayer.Engine;
 
-namespace IIS.Models
+namespace DomainLayer.Models
 {
     public class Clients : Model<Clients>
     {
         [Key]
         public int? ModelId { get; set; }
-
-        [Required]
+        
         public DateTime? CreatedAt { get; set; }
 
         [Required]
@@ -28,8 +27,7 @@ namespace IIS.Models
         
         public int? ContactPhoneNumber { get; set; }
         
-        [Required]
-        public int? Deleted { get; set; }
+        public string Deleted { get; set; }
 
         public Clients(Connection connection) : base(connection) {}
         
@@ -40,8 +38,15 @@ namespace IIS.Models
         
         public new IEnumerable<Clients> Load()
         {
-            Deleted = 0;
-            return Database.Load();
+            Deleted = false.ToString();
+            return base.Load();
+        }
+
+        public new void Save()
+        {
+            CreatedAt = DateTime.Now;
+            Deleted = false.ToString();
+            base.Save();
         }
 
         public double GetPaymentAmountForMonth(int month)

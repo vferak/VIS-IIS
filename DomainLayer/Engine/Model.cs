@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace IIS.Engine
+namespace DomainLayer.Engine
 {
     public abstract class Model<T>
     {

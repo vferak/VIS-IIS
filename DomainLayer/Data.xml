@@ -6,12 +6,14 @@
       <FirstName>Vojtěch</FirstName>
       <LastName>Ferák</LastName>
       <Email>vferak@gmail.com</Email>
+      <Deleted>0</Deleted>
     </Row>
     <Row>
       <Id>2</Id>
       <FirstName>Pepa</FirstName>
       <LastName>Ferák</LastName>
       <Email>pferak@gmail.com</Email>
+      <Deleted>0</Deleted>
     </Row>
   </Users>
   <UsersVacations>

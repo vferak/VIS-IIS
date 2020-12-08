@@ -1,4 +1,6 @@
-﻿namespace IIS.Engine
+﻿using DomainLayer.Engine;
+
+namespace DomainLayer.Engine
 {
     public class MSSQLConnection : Connection
     {

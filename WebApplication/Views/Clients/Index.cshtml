@@ -1,0 +1,49 @@
+﻿@using DomainLayer.Models
+@{
+    ViewBag.Title = "Home Page";
+
+    IEnumerable<Clients> clients = ViewBag.Clients;
+}
+
+<div class="row">
+    <div class="col-12 mt-4">
+        <h2 class="mb-3">
+            Klienti
+            <span class="float-right">
+                <a href="@Url.Action("Create", "Clients")" class="btn btn-primary">Nový klient</a>
+            </span>
+        </h2>
+        <div class="row">
+            <div class="col-md-12">
+                <table class="table table-hover">
+                    <thead>
+                    <tr class="d-flex">
+                        <th class="col-10">Název</th>
+                        <th class="col-2 text-right">Akce</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var client in clients)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-10">
+                                <a href="@Url.Action("Show", "Clients", new {modelId = client.ModelId})">@client.Name</a>
+                            </td>
+                            <td class="col-2">
+                                <div class="btn-group float-right" role="group">
+                                    <a class="btn btn-primary" href="@Url.Action("Update", "Clients", new {modelId = client.ModelId})">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a class="btn btn-danger text-white" href="@Url.Action("Destroy", "Clients", new {modelId = client.ModelId})">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

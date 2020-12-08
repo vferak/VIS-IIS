@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using IIS.Engine;
+using DomainLayer.Engine;
 
-namespace IIS.Models
+namespace DomainLayer.Models
 {
     public class Tasks : Model<Tasks>
     {

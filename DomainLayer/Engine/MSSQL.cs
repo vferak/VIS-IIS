@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 
 
-namespace IIS.Engine
+namespace DomainLayer.Engine
 {
     public class MSSQL<T> : Database<T>
     {

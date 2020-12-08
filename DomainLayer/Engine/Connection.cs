@@ -1,6 +1,6 @@
-﻿using System.Dynamic;
+﻿using DomainLayer.Engine;
 
-namespace IIS.Engine
+namespace DomainLayer.Engine
 {
     public abstract class Connection
     {

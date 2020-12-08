@@ -1,8 +1,8 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using IIS.Engine;
+using DomainLayer.Engine;
 
-namespace IIS.Models
+namespace DomainLayer.Models
 {
     public class TasksEvents : Model<TasksEvents>
     {

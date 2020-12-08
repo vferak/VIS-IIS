@@ -1,9 +1,9 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
-using IIS.Engine;
+using DomainLayer.Engine;
 
-namespace IIS.Models
+namespace DomainLayer.Models
 {
     public class UsersVacations : Model<UsersVacations>
     {

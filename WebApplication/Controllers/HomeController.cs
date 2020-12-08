@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DomainLayer.Engine;
+using Microsoft.AspNetCore.Mvc;
 
 namespace WebApplication.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
+        public HomeController(Connection connection) : base(connection) {}
+
         public IActionResult Index()
         {
             return View();

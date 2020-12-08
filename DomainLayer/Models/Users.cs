@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using IIS.Engine;
+using DomainLayer.Engine;
 using Microsoft.VisualBasic.FileIO;
 
-namespace IIS.Models
+namespace DomainLayer.Models
 {
     public class Users : Model<Users>
     {
         [Key]
         public int? ModelId { get; set; }
-
-        [Required]
+        
         public DateTime? CreatedAt { get; set; }
 
         [Required]
@@ -33,12 +32,11 @@ namespace IIS.Models
         public int? PhoneNumber { get; set; }
         
         [Required]
-        public int? IsManager { get; set; }
+        public string IsManager { get; set; }
 
         public int? SeniorModelId { get; set; }
-
-        [Required]
-        public int? Deleted { get; set; }
+        
+        public string Deleted { get; set; }
 
         public Users(Connection connection) : base(connection) {}
 
@@ -49,8 +47,15 @@ namespace IIS.Models
         
         public new IEnumerable<Users> Load()
         {
-            Deleted = 0;
+            Deleted = false.ToString();
             return base.Load();
+        }
+        
+        public new void Save()
+        {
+            CreatedAt = DateTime.Now;
+            Deleted = false.ToString();
+            base.Save();
         }
 
         public new void Delete()
@@ -58,8 +63,13 @@ namespace IIS.Models
             if (!HasSeniorAssigned()) return;
             
             AssignTasksToSenior();
-            Deleted = 1;
-            Save();
+            Deleted = true.ToString();
+            base.Save();
+        }
+
+        public string GetFullName()
+        {
+            return FirstName + " " + LastName;
         }
 
         public bool HasSeniorAssigned()

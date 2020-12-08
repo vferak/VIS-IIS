@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Reflection;
+using DomainLayer.Engine;
 
-namespace IIS.Engine
+namespace DomainLayer.Engine
 {
     public abstract class Database<T>
     {

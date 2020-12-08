@@ -1,0 +1,5 @@
+﻿@using DomainLayer.Models
+@{
+    Clients client = ViewBag.Client;
+    await Html.RenderPartialAsync("Form", client);
+}
