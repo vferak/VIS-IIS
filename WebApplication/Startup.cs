@@ -20,8 +20,15 @@ namespace WebApplication
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
-            services.AddScoped<Connection, MSSQLConnection>();
+
+            if (Configuration.GetValue<string>("Database") == "MSSQL")
+            {
+                services.AddScoped<Connection, MSSQLConnection>();
+            }
+            else
+            {
+                services.AddScoped<Connection, XMLConnection>();
+            }
 
             services.AddMvc(options => {
                 options.ModelBinderProviders.Insert(0, new MyModelBinderProvider());

@@ -9,29 +9,22 @@ namespace DomainLayer.Models
 {
     public class Users : Model<Users>
     {
-        [Key]
-        public int? ModelId { get; set; }
+        [Key] public int? ModelId { get; set; }
         
         public DateTime? CreatedAt { get; set; }
 
-        [Required]
-        public string Username { get; set; }
+        [Required] public string Username { get; set; }
         
-        [Required]
-        public string Password { get; set; }
+        [Required] public string Password { get; set; }
 
-        [Required]
-        public string FirstName { get; set; }
+        [Required] public string FirstName { get; set; }
 
-        [Required]
-        public string LastName { get; set; }
+        [Required] public string LastName { get; set; }
         
-        [Required]
-        public string Email { get; set; }
+        [Required] [EmailAddress] public string Email { get; set; }
         
         public int? PhoneNumber { get; set; }
         
-        [Required]
         public string IsManager { get; set; }
 
         public int? SeniorModelId { get; set; }
@@ -47,14 +40,14 @@ namespace DomainLayer.Models
         
         public new IEnumerable<Users> Load()
         {
-            Deleted = false.ToString();
+            Deleted = false.ToString().ToLower();
             return base.Load();
         }
         
         public new void Save()
         {
             CreatedAt = DateTime.Now;
-            Deleted = false.ToString();
+            Deleted = false.ToString().ToLower();
             base.Save();
         }
 
@@ -63,7 +56,7 @@ namespace DomainLayer.Models
             if (!HasSeniorAssigned()) return;
             
             AssignTasksToSenior();
-            Deleted = true.ToString();
+            Deleted = true.ToString().ToLower();
             base.Save();
         }
 
@@ -75,6 +68,11 @@ namespace DomainLayer.Models
         public bool HasSeniorAssigned()
         {
             return LoadOne().SeniorModelId != null;
+        }
+
+        public IEnumerable<Users> LoadSeniors()
+        {
+            return Load().Where(user => !HasSeniorAssigned()).ToList();
         }
         
         private void AssignTasksToSenior()
@@ -95,6 +93,12 @@ namespace DomainLayer.Models
                 
                 task.AddTaskEvent(taskEvent);
             }
+        }
+
+        public void Promote()
+        {
+            IsManager = true.ToString().ToLower();
+            base.Save();
         }
     }
 }

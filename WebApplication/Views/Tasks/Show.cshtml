@@ -1,0 +1,16 @@
+﻿@using DomainLayer.Models
+@{
+    ViewBag.Title = "Home Page";
+
+    Tasks task = ViewBag.Task;
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h2>@task.Title</h2>
+            </div>
+        </div>
+    </div>
+</div>

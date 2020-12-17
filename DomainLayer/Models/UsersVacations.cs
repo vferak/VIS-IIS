@@ -11,9 +11,9 @@ namespace DomainLayer.Models
 
         [Required] public int? UserModelId { get; set; }
 
-        [Required] public DateTime? CreatedAt { get; set; }
+        public DateTime? CreatedAt { get; set; }
 
-        [Required] public int? IsAccepted { get; set; }
+        public string IsAccepted { get; set; }
 
         [Required] public DateTime? DateFrom { get; set; }
 
@@ -23,9 +23,26 @@ namespace DomainLayer.Models
 
         public UsersVacations(Connection connection) : base(connection) {}
 
+        public new void Save()
+        {
+            if (Database.IsInsert())
+            {
+                CreatedAt = DateTime.Now;
+            }
+
+            IsAccepted = false.ToString().ToLower();
+            base.Save();
+        }
+
         public bool IsDateValid()
         {
             return DateFrom != null && DateTo != null && DateFrom <= DateTo && DateFrom >= DateTime.Now;
+        }
+
+        public void Accept()
+        {
+            IsAccepted = true.ToString().ToLower();
+            base.Save();
         }
     }
 }

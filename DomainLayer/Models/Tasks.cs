@@ -12,35 +12,37 @@ namespace DomainLayer.Models
         const int RateStandard = 1500;
         const int RateUrgent = 2200;
 
-        [Key]
-        public int? ModelId { get; set; }
+        [Key] public int? ModelId { get; set; }
 
-        [Required]
-        public int? ClientModelId { get; set; }
+        [Required] public int? ClientModelId { get; set; }
         
-        [Required]
-        public int? UserModelId { get; set; }
+        [Required] public int? UserModelId { get; set; }
         
-        [Required]
         public DateTime? CreatedAt { get; set; }
 
-        [Required]
         public DateTime? ModifiedAt { get; set; }
 
-        [Required]
-        public string Title { get; set; }
+        [Required] public string Title { get; set; }
         
-        [Required]
-        public int? ExpectedTime { get; set; }
+        [Required] public int? ExpectedTime { get; set; }
         
-        [Required]
-        public DateTime? ExpectedDate { get; set; }
+        [Required] public DateTime? ExpectedDate { get; set; }
         
-        [Required]
-        public int? Rate { get; set; }
+        [Required] public int? Rate { get; set; }
 
         public Tasks(Connection connection) : base(connection) {}
 
+        public new void Save()
+        {
+            if (Database.IsInsert())
+            {
+                CreatedAt = DateTime.Now;
+            }
+            
+            ModifiedAt = DateTime.Now;
+            base.Save();
+        }
+        
         public int GetRealTime()
         {
             var tasksEvents = GetTasksEvents();
@@ -76,6 +78,16 @@ namespace DomainLayer.Models
             UserModelId = taskEvent.UserModelId;
             
             Save();
+        }
+
+        public Dictionary<string, int> GetRates()
+        {
+            return new Dictionary<string, int>
+            {
+                {"Standard", RateStandard},
+                {"Implementation", RateImplementation},
+                {"Urgent", RateUrgent}
+            };
         }
     }
 }

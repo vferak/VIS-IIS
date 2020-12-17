@@ -2,15 +2,15 @@
 @{
     ViewBag.Title = "Home Page";
 
-    IEnumerable<Users> users = ViewBag.Users;
+    IEnumerable<UsersVacations> usersVacations = ViewBag.UsersVacations;
 }
 
 <div class="row">
     <div class="col-12 mt-4">
         <h2 class="mb-3">
-            Uživatelé
+            Dovolené
             <span class="float-right">
-                <a href="@Url.Action("Create", "Users")" class="btn btn-primary">Nový uživatel</a>
+                <a href="@Url.Action("Create", "UsersVacations")" class="btn btn-primary">Nová dovolená</a>
             </span>
         </h2>
         <div class="row">
@@ -23,21 +23,21 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @foreach (var user in users)
+                    @foreach (var userVacation in usersVacations)
                     {
                         <tr class="d-flex">
                             <td class="col-10">
-                                <a href="@Url.Action("Show", "Users", new {modelId = user.ModelId})">@user.GetFullName()</a>
+                                <a href="@Url.Action("Show", "UsersVacations", new {modelId = userVacation.ModelId})">@userVacation.Text</a>
                             </td>
                             <td class="col-2">
                                 <div class="btn-group float-right" role="group">
-                                    <a class="btn btn-primary" href="@Url.Action("Update", "Users", new {modelId = user.ModelId})">
+                                    <a class="btn btn-primary" href="@Url.Action("Update", "UsersVacations", new {modelId = userVacation.ModelId})">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-warning" href="@Url.Action("Promote", "Users", new {modelId = user.ModelId})">
+                                    <a class="btn btn-warning" href="@Url.Action("Accept", "UsersVacations", new {modelId = userVacation.ModelId})">
                                         <i class="fas fa-edit"></i>
                                     </a>
-                                    <a class="btn btn-danger text-white" href="@Url.Action("Destroy", "Users", new {modelId = user.ModelId})">
+                                    <a class="btn btn-danger text-white" href="@Url.Action("Destroy", "UsersVacations", new {modelId = userVacation.ModelId})">
                                         <i class="fas fa-trash"></i>
                                     </a>
                                 </div>

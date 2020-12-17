@@ -1,12 +1,13 @@
 ﻿using DomainLayer.Engine;
 using DomainLayer.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication.Controllers
 {
     public class ClientsController : BaseController
     {
-        public ClientsController(Connection connection) : base(connection) {}
+        public ClientsController(Connection connection, IConfiguration config) : base(connection, config) {}
 
         private ActionResult ProcessForm(Clients client)
         {
@@ -23,7 +24,7 @@ namespace WebApplication.Controllers
         public ActionResult Show(int modelId)
         {
             var client = new Clients(Connection) {ModelId = modelId}.LoadOne();
-            // if (client == null) return HttpNotFound();
+            if (client == null) return NotFound();
 
             ViewBag.Client = client;
             return View();
@@ -43,7 +44,7 @@ namespace WebApplication.Controllers
         public ActionResult Update(int? modelId)
         {
             var client = new Clients(Connection) {ModelId = modelId}.LoadOne();
-            // if (client == null) return HttpNotFound();
+            if (client == null) return NotFound();
 
             ViewBag.Client = client;
             return View();
@@ -58,7 +59,7 @@ namespace WebApplication.Controllers
         public ActionResult Destroy(int modelId)
         {
             var client = new Clients(Connection) {ModelId = modelId}.LoadOne();
-            // if (client == null) return HttpNotFound();
+            if (client == null) return NotFound();
 
             client.Delete();
             return RedirectToAction("Index");

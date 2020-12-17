@@ -16,9 +16,19 @@
       <Deleted>0</Deleted>
     </Row>
   </Users>
-  <UsersVacations>
+  <UsersVacations IncrementId="1">
   </UsersVacations>
-  <Clients>
+  <Clients IncrementId="2">
+    <Row>
+      <ModelId>1</ModelId>
+      <CreatedAt>2020-12-17 13:04:31</CreatedAt>
+      <Name>Testovací</Name>
+      <ContactFirstName>Test</ContactFirstName>
+      <ContactLastName>Testovič</ContactLastName>
+      <ContactEmail>test@test.cz</ContactEmail>
+      <ContactPhoneNumber>123456789</ContactPhoneNumber>
+      <Deleted>false</Deleted>
+    </Row>
   </Clients>
   <Tasks IncrementId="12">
     <Row>

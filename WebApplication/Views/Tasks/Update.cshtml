@@ -1,0 +1,5 @@
+﻿@using DomainLayer.Models
+@{
+    Tasks task = ViewBag.Task;
+    await Html.RenderPartialAsync("Form", task);
+}

@@ -1,0 +1,5 @@
+﻿@using DomainLayer.Models
+@{
+    UsersVacations userVacation = ViewBag.UserVacation;
+    await Html.RenderPartialAsync("Form", userVacation);
+}

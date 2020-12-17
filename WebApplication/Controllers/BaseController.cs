@@ -1,5 +1,6 @@
 ﻿using DomainLayer.Engine;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 
 namespace WebApplication.Controllers
 {
@@ -7,9 +8,12 @@ namespace WebApplication.Controllers
     {
         public Connection Connection { get; set; }
         
-        public BaseController(Connection connection)
+        public IConfiguration Config { get; set; }
+        
+        public BaseController(Connection connection, IConfiguration config)
         {
             Connection = connection;
+            Config = config;
         }
     }
 }

@@ -8,22 +8,17 @@ namespace DomainLayer.Models
 {
     public class Clients : Model<Clients>
     {
-        [Key]
-        public int? ModelId { get; set; }
+        [Key] public int? ModelId { get; set; }
         
         public DateTime? CreatedAt { get; set; }
 
-        [Required]
-        public string Name { get; set; }
+        [Required] public string Name { get; set; }
 
-        [Required]
-        public string ContactFirstName { get; set; }
+        [Required] public string ContactFirstName { get; set; }
 
-        [Required]
-        public string ContactLastName { get; set; }
+        [Required] public string ContactLastName { get; set; }
         
-        [Required]
-        public string ContactEmail { get; set; }
+        [Required] [EmailAddress] public string ContactEmail { get; set; }
         
         public int? ContactPhoneNumber { get; set; }
         
@@ -38,14 +33,20 @@ namespace DomainLayer.Models
         
         public new IEnumerable<Clients> Load()
         {
-            Deleted = false.ToString();
+            Deleted = false.ToString().ToLower();
             return base.Load();
         }
 
         public new void Save()
         {
             CreatedAt = DateTime.Now;
-            Deleted = false.ToString();
+            Deleted = false.ToString().ToLower();
+            base.Save();
+        }
+        
+        public new void Delete()
+        {
+            Deleted = true.ToString().ToLower();
             base.Save();
         }
 

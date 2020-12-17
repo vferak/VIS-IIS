@@ -23,7 +23,7 @@ namespace DomainLayer.Engine
             Model = model;
         }
         
-        protected bool IsInsert()
+        public bool IsInsert()
         {
             var model = (T)Activator.CreateInstance(typeof(T), Model.Connection);
             foreach (var property in typeof(T).GetProperties())
