@@ -27,6 +27,15 @@ namespace WebApplication.Controllers
             }).ToList();
         }
         
+        private IEnumerable<SelectListItem> GetStatusesSelectList()
+        {
+            return new TasksEvents(Connection).GetStatuses().Select(i => new SelectListItem
+            {
+                Value = i.Value.ToString(),
+                Text = i.Key
+            }).ToList();
+        }
+        
         private IEnumerable<SelectListItem> GetClientsSelectList()
         {
             return new Clients(Connection).Load().Select(i => new SelectListItem
@@ -48,6 +57,8 @@ namespace WebApplication.Controllers
             if (task == null) return NotFound();
 
             ViewBag.Task = task;
+            ViewBag.TaskEvents = task.GetTasksEvents().Reverse();
+            ViewBag.Statuses = GetStatusesSelectList();
             return View();
         }
 
@@ -91,6 +102,21 @@ namespace WebApplication.Controllers
 
             task.Delete();
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult CreateEvent(TasksEvents taskEvent)
+        {
+            taskEvent.UserModelId = Config.GetValue<int>("LoggedUser");
+            ModelState.Clear();
+            TryValidateModel(taskEvent);
+
+            if (ModelState.IsValid)
+            {
+                taskEvent.Save();
+            }
+            
+            return RedirectToAction("Show", new {modelId = taskEvent.TaskModelId});
         }
     }
 }

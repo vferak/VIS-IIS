@@ -19,7 +19,12 @@ namespace DesktopApplication
 
         private void výpisToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            throw new System.NotImplementedException();
+            ShowContent(new Tasks.Index());
+        }
+
+        private void novýToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ShowContent(new Tasks.Form());
         }
 
         private void výpisToolStripMenuItem1_Click(object sender, EventArgs e)

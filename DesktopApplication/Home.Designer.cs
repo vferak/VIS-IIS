@@ -76,6 +76,7 @@ namespace DesktopApplication
             this.novýToolStripMenuItem.Name = "novýToolStripMenuItem";
             this.novýToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.novýToolStripMenuItem.Text = "Nový";
+            this.novýToolStripMenuItem.Click += new System.EventHandler(this.novýToolStripMenuItem_Click);
             // 
             // výpisToolStripMenuItem
             // 
@@ -94,14 +95,14 @@ namespace DesktopApplication
             // novýToolStripMenuItem1
             // 
             this.novýToolStripMenuItem1.Name = "novýToolStripMenuItem1";
-            this.novýToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.novýToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
             this.novýToolStripMenuItem1.Text = "Nový";
             this.novýToolStripMenuItem1.Click += new System.EventHandler(this.novýToolStripMenuItem1_Click);
             // 
             // výpisToolStripMenuItem1
             // 
             this.výpisToolStripMenuItem1.Name = "výpisToolStripMenuItem1";
-            this.výpisToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.výpisToolStripMenuItem1.Size = new System.Drawing.Size(102, 22);
             this.výpisToolStripMenuItem1.Text = "Výpis";
             this.výpisToolStripMenuItem1.Click += new System.EventHandler(this.výpisToolStripMenuItem1_Click);
             // 

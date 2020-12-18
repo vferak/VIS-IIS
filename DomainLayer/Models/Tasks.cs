@@ -8,9 +8,9 @@ namespace DomainLayer.Models
 {
     public class Tasks : Model<Tasks>
     {
-        const int RateImplementation = 1000;
-        const int RateStandard = 1500;
-        const int RateUrgent = 2200;
+        public const int RateImplementation = 1000;
+        public const int RateStandard = 1500;
+        public const int RateUrgent = 2200;
 
         [Key] public int? ModelId { get; set; }
 
@@ -84,9 +84,9 @@ namespace DomainLayer.Models
         {
             return new Dictionary<string, int>
             {
-                {"Standard", RateStandard},
-                {"Implementation", RateImplementation},
-                {"Urgent", RateUrgent}
+                {"Standartní", RateStandard},
+                {"Implementační", RateImplementation},
+                {"Urgentní", RateUrgent}
             };
         }
     }

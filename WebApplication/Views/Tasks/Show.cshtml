@@ -1,8 +1,10 @@
 ﻿@using DomainLayer.Models
+@model DomainLayer.Models.TasksEvents
 @{
     ViewBag.Title = "Home Page";
 
     Tasks task = ViewBag.Task;
+    IEnumerable<TasksEvents> taskEvents = ViewBag.TaskEvents;
 }
 
 <div class="row">
@@ -14,3 +16,50 @@
         </div>
     </div>
 </div>
+<div class="row">
+    <div class="col-md-12">
+        <form asp-controller="Tasks" asp-action="CreateEvent" method="post">
+            <div class="form-group">
+                <input asp-for="TaskModelId" value="@task.ModelId" type="hidden">
+            </div>
+            <div class="form-group required form-row">
+                <div class="col">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" asp-items="@ViewBag.Statuses" class="form-control"></select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="col">
+                    <label asp-for="Time" class="control-label"></label>
+                    <input asp-for="Time" class="form-control"/>
+                    <span asp-validation-for="Time" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group required">
+                <label asp-for="Text" class="control-label"></label>
+                <textarea asp-for="Text" class="form-control"></textarea>
+                <span asp-validation-for="Text" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Uložit</button>
+        </form>
+    </div>
+</div>
+
+
+@foreach (var taskEvent in taskEvents)
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    @taskEvent.GetUser().GetFullName()
+                    <span class="float-right">@taskEvent.Time minut</span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">@taskEvent.GetStatuses().FirstOrDefault(i => i.Value == taskEvent.Status).Key</h5>
+                    <p class="card-text">@taskEvent.Text</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -26,6 +26,15 @@
       <Compile Update="Clients\Show.cs">
         <SubType>UserControl</SubType>
       </Compile>
+      <Compile Update="Tasks\Index.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Tasks\Form.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Tasks\Show.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
     </ItemGroup>
 
     <ItemGroup>
