@@ -32,50 +32,40 @@ namespace DesktopApplication.Clients
         private void InitializeComponent()
         {
             this.listBox = new System.Windows.Forms.ListBox();
-            this.Edit = new System.Windows.Forms.Button();
-            this.Delete = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // listBox
             // 
             this.listBox.FormattingEnabled = true;
-            this.listBox.Location = new System.Drawing.Point(0, 0);
+            this.listBox.Location = new System.Drawing.Point(0, 39);
             this.listBox.Name = "listBox";
-            this.listBox.Size = new System.Drawing.Size(800, 368);
+            this.listBox.Size = new System.Drawing.Size(800, 381);
             this.listBox.TabIndex = 0;
+            this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
-            // Edit
+            // label1
             // 
-            this.Edit.Location = new System.Drawing.Point(288, 388);
-            this.Edit.Name = "Edit";
-            this.Edit.Size = new System.Drawing.Size(75, 23);
-            this.Edit.TabIndex = 1;
-            this.Edit.Text = "Edit";
-            this.Edit.UseVisualStyleBackColor = true;
-            // 
-            // Delete
-            // 
-            this.Delete.Location = new System.Drawing.Point(434, 388);
-            this.Delete.Name = "Delete";
-            this.Delete.Size = new System.Drawing.Size(75, 23);
-            this.Delete.TabIndex = 2;
-            this.Delete.Text = "Delete";
-            this.Delete.UseVisualStyleBackColor = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
+            this.label1.Location = new System.Drawing.Point(342, 11);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Klienti";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
             // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.Delete);
-            this.Controls.Add(this.Edit);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox);
             this.Name = "Index";
             this.Size = new System.Drawing.Size(800, 426);
             this.ResumeLayout(false);
         }
 
-        private System.Windows.Forms.Button Delete;
-        private System.Windows.Forms.Button Edit;
+        private System.Windows.Forms.Label label1;
 
         private System.Windows.Forms.ListBox listBox;
 

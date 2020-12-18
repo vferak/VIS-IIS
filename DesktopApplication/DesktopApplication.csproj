@@ -6,6 +6,10 @@
         <UseWindowsForms>true</UseWindowsForms>
     </PropertyGroup>
 
+    <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+      <PlatformTarget>AnyCPU</PlatformTarget>
+    </PropertyGroup>
+
     <ItemGroup>
       <Compile Update="Home.cs">
         <SubType>Form</SubType>
@@ -14,6 +18,12 @@
         <SubType>UserControl</SubType>
       </Compile>
       <Compile Update="Clients\Form.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Engine\UserControlExtension.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Clients\Show.cs">
         <SubType>UserControl</SubType>
       </Compile>
     </ItemGroup>

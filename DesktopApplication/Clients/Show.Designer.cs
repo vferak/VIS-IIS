@@ -2,7 +2,7 @@
 
 namespace DesktopApplication.Clients
 {
-    partial class Form
+    partial class Show
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,25 +31,20 @@ namespace DesktopApplication.Clients
         /// </summary>
         private void InitializeComponent()
         {
-            this.nameTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.contactFirstNameTextBox = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.contactLastNameTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.contactEmailTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.contactPhoneTextBox = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.nameLabel = new System.Windows.Forms.Label();
+            this.contactFirstNameLabel = new System.Windows.Forms.Label();
+            this.contactLastNameLabel = new System.Windows.Forms.Label();
+            this.contactEmailLabel = new System.Windows.Forms.Label();
+            this.contactPhoneLabel = new System.Windows.Forms.Label();
+            this.Edit = new System.Windows.Forms.Button();
+            this.Delete = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // nameTextBox
-            // 
-            this.nameTextBox.Location = new System.Drawing.Point(302, 62);
-            this.nameTextBox.Name = "nameTextBox";
-            this.nameTextBox.Size = new System.Drawing.Size(194, 20);
-            this.nameTextBox.TabIndex = 0;
             // 
             // label1
             // 
@@ -67,13 +62,6 @@ namespace DesktopApplication.Clients
             this.label2.TabIndex = 3;
             this.label2.Text = "Jméno kontaktu";
             // 
-            // contactFirstNameTextBox
-            // 
-            this.contactFirstNameTextBox.Location = new System.Drawing.Point(302, 128);
-            this.contactFirstNameTextBox.Name = "contactFirstNameTextBox";
-            this.contactFirstNameTextBox.Size = new System.Drawing.Size(194, 20);
-            this.contactFirstNameTextBox.TabIndex = 2;
-            // 
             // label3
             // 
             this.label3.Location = new System.Drawing.Point(302, 168);
@@ -81,13 +69,6 @@ namespace DesktopApplication.Clients
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 5;
             this.label3.Text = "Příjmení kontaktu";
-            // 
-            // contactLastNameTextBox
-            // 
-            this.contactLastNameTextBox.Location = new System.Drawing.Point(302, 194);
-            this.contactLastNameTextBox.Name = "contactLastNameTextBox";
-            this.contactLastNameTextBox.Size = new System.Drawing.Size(194, 20);
-            this.contactLastNameTextBox.TabIndex = 4;
             // 
             // label4
             // 
@@ -97,13 +78,6 @@ namespace DesktopApplication.Clients
             this.label4.TabIndex = 7;
             this.label4.Text = "Email kontaktu";
             // 
-            // contactEmailTextBox
-            // 
-            this.contactEmailTextBox.Location = new System.Drawing.Point(302, 264);
-            this.contactEmailTextBox.Name = "contactEmailTextBox";
-            this.contactEmailTextBox.Size = new System.Drawing.Size(194, 20);
-            this.contactEmailTextBox.TabIndex = 6;
-            // 
             // label5
             // 
             this.label5.Location = new System.Drawing.Point(302, 301);
@@ -112,43 +86,102 @@ namespace DesktopApplication.Clients
             this.label5.TabIndex = 9;
             this.label5.Text = "Telefon kontaktu";
             // 
-            // contactPhoneTextBox
-            // 
-            this.contactPhoneTextBox.Location = new System.Drawing.Point(302, 327);
-            this.contactPhoneTextBox.Name = "contactPhoneTextBox";
-            this.contactPhoneTextBox.Size = new System.Drawing.Size(194, 20);
-            this.contactPhoneTextBox.TabIndex = 8;
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(362, 381);
+            this.button1.Location = new System.Drawing.Point(69, 36);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 10;
-            this.button1.Text = "Uložit";
+            this.button1.Text = "Zpět";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // Form
+            // nameLabel
+            // 
+            this.nameLabel.Location = new System.Drawing.Point(302, 59);
+            this.nameLabel.Name = "nameLabel";
+            this.nameLabel.Size = new System.Drawing.Size(100, 23);
+            this.nameLabel.TabIndex = 11;
+            // 
+            // contactFirstNameLabel
+            // 
+            this.contactFirstNameLabel.Location = new System.Drawing.Point(302, 125);
+            this.contactFirstNameLabel.Name = "contactFirstNameLabel";
+            this.contactFirstNameLabel.Size = new System.Drawing.Size(100, 23);
+            this.contactFirstNameLabel.TabIndex = 12;
+            // 
+            // contactLastNameLabel
+            // 
+            this.contactLastNameLabel.Location = new System.Drawing.Point(302, 191);
+            this.contactLastNameLabel.Name = "contactLastNameLabel";
+            this.contactLastNameLabel.Size = new System.Drawing.Size(100, 23);
+            this.contactLastNameLabel.TabIndex = 13;
+            // 
+            // contactEmailLabel
+            // 
+            this.contactEmailLabel.Location = new System.Drawing.Point(302, 261);
+            this.contactEmailLabel.Name = "contactEmailLabel";
+            this.contactEmailLabel.Size = new System.Drawing.Size(100, 23);
+            this.contactEmailLabel.TabIndex = 14;
+            // 
+            // contactPhoneLabel
+            // 
+            this.contactPhoneLabel.Location = new System.Drawing.Point(302, 324);
+            this.contactPhoneLabel.Name = "contactPhoneLabel";
+            this.contactPhoneLabel.Size = new System.Drawing.Size(100, 23);
+            this.contactPhoneLabel.TabIndex = 15;
+            // 
+            // Edit
+            // 
+            this.Edit.Location = new System.Drawing.Point(658, 36);
+            this.Edit.Name = "Edit";
+            this.Edit.Size = new System.Drawing.Size(75, 23);
+            this.Edit.TabIndex = 16;
+            this.Edit.Text = "Editovat";
+            this.Edit.UseVisualStyleBackColor = true;
+            this.Edit.Click += new System.EventHandler(this.Edit_Click);
+            // 
+            // Delete
+            // 
+            this.Delete.Location = new System.Drawing.Point(658, 65);
+            this.Delete.Name = "Delete";
+            this.Delete.Size = new System.Drawing.Size(75, 23);
+            this.Delete.TabIndex = 17;
+            this.Delete.Text = "Smazat";
+            this.Delete.UseVisualStyleBackColor = true;
+            this.Delete.Click += new System.EventHandler(this.Delete_Click);
+            // 
+            // Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.Delete);
+            this.Controls.Add(this.Edit);
+            this.Controls.Add(this.contactPhoneLabel);
+            this.Controls.Add(this.contactEmailLabel);
+            this.Controls.Add(this.contactLastNameLabel);
+            this.Controls.Add(this.contactFirstNameLabel);
+            this.Controls.Add(this.nameLabel);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.contactPhoneTextBox);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.contactEmailTextBox);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.contactLastNameTextBox);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.contactFirstNameTextBox);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.nameTextBox);
-            this.Name = "Form";
+            this.Name = "Show";
             this.Size = new System.Drawing.Size(800, 420);
             this.ResumeLayout(false);
-            this.PerformLayout();
         }
+
+        private System.Windows.Forms.Button Delete;
+        private System.Windows.Forms.Button Edit;
+
+        private System.Windows.Forms.Label contactEmailLabel;
+        private System.Windows.Forms.Label contactFirstNameLabel;
+        private System.Windows.Forms.Label contactLastNameLabel;
+        private System.Windows.Forms.Label contactPhoneLabel;
+
+        private System.Windows.Forms.Label nameLabel;
 
         private System.Windows.Forms.Button button1;
 
@@ -156,14 +189,8 @@ namespace DesktopApplication.Clients
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox contactFirstNameTextBox;
-        private System.Windows.Forms.TextBox contactLastNameTextBox;
-        private System.Windows.Forms.TextBox contactEmailTextBox;
-        private System.Windows.Forms.TextBox contactPhoneTextBox;
 
         private System.Windows.Forms.Label label1;
-
-        private System.Windows.Forms.TextBox nameTextBox;
 
         #endregion
     }
