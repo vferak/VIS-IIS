@@ -44,7 +44,7 @@
       <Deleted>true</Deleted>
     </Row>
   </Users>
-  <UsersVacations IncrementId="16">
+  <UsersVacations IncrementId="17">
     <Row>
       <ModelId>14</ModelId>
       <UserModelId>1</UserModelId>
@@ -62,6 +62,15 @@
       <DateFrom>2020-12-20 22:54:30</DateFrom>
       <DateTo>2020-12-20 22:54:30</DateTo>
       <Text>Osobní důvody</Text>
+    </Row>
+    <Row>
+      <ModelId>16</ModelId>
+      <UserModelId>1</UserModelId>
+      <CreatedAt>2020-12-20 22:59:19</CreatedAt>
+      <IsAccepted>true</IsAccepted>
+      <DateFrom>2020-12-21 22:59:00</DateFrom>
+      <DateTo>2020-12-23 22:59:00</DateTo>
+      <Text>Vánoční dovolená.</Text>
     </Row>
   </UsersVacations>
   <Clients IncrementId="12">

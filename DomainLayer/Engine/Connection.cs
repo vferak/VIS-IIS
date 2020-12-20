@@ -1,6 +1,4 @@
-﻿using DomainLayer.Engine;
-
-namespace DomainLayer.Engine
+﻿namespace DomainLayer.Engine
 {
     public abstract class Connection
     {

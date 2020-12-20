@@ -45,6 +45,8 @@ namespace DesktopApplication.Tasks
             this.expectedDateLabel = new System.Windows.Forms.Label();
             this.rateLabel = new System.Windows.Forms.Label();
             this.eventsListBox = new System.Windows.Forms.ListBox();
+            this.realTimeLabel = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -105,7 +107,7 @@ namespace DesktopApplication.Tasks
             // 
             this.label2.Location = new System.Drawing.Point(196, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(412, 23);
+            this.label2.Size = new System.Drawing.Size(100, 23);
             this.label2.TabIndex = 20;
             this.label2.Text = "Název";
             // 
@@ -128,7 +130,7 @@ namespace DesktopApplication.Tasks
             // 
             this.titleLabel.Location = new System.Drawing.Point(196, 64);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(412, 23);
+            this.titleLabel.Size = new System.Drawing.Size(182, 23);
             this.titleLabel.TabIndex = 26;
             // 
             // expectedTimeLabel
@@ -160,10 +162,27 @@ namespace DesktopApplication.Tasks
             this.eventsListBox.Size = new System.Drawing.Size(667, 173);
             this.eventsListBox.TabIndex = 30;
             // 
+            // realTimeLabel
+            // 
+            this.realTimeLabel.Location = new System.Drawing.Point(458, 59);
+            this.realTimeLabel.Name = "realTimeLabel";
+            this.realTimeLabel.Size = new System.Drawing.Size(100, 23);
+            this.realTimeLabel.TabIndex = 32;
+            // 
+            // label7
+            // 
+            this.label7.Location = new System.Drawing.Point(458, 36);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(100, 23);
+            this.label7.TabIndex = 31;
+            this.label7.Text = "Reálný čas";
+            // 
             // Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.realTimeLabel);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.eventsListBox);
             this.Controls.Add(this.rateLabel);
             this.Controls.Add(this.expectedDateLabel);
@@ -182,6 +201,9 @@ namespace DesktopApplication.Tasks
             this.Size = new System.Drawing.Size(800, 420);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.Label realTimeLabel;
+        private System.Windows.Forms.Label label7;
 
         private System.Windows.Forms.ListBox eventsListBox;
 

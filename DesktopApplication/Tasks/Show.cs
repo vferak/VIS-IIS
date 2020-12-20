@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace DesktopApplication.Tasks
@@ -14,13 +15,15 @@ namespace DesktopApplication.Tasks
             Task = task;
             clientLabel.Text = new DomainLayer.Models.Clients(Program.Connection){ ModelId = task.ClientModelId }.Database.LoadOne().Name;
             titleLabel.Text = task.Title;
+            realTimeLabel.Text = task.GetRealTime().ToString();
             expectedTimeLabel.Text = task.ExpectedTime.ToString();
             expectedDateLabel.Text = task.ExpectedDate.ToString();
             rateLabel.Text = task.Rate.ToString();
             
             foreach (var taskEvent in new DomainLayer.Models.TasksEvents(Program.Connection){TaskModelId = task.ModelId}.Load())
             {
-                eventsListBox.Items.Add(new Item<DomainLayer.Models.TasksEvents>(taskEvent, taskEvent.Status));
+                eventsListBox.Items.Add(new Item<DomainLayer.Models.TasksEvents>(taskEvent,
+                    $"{taskEvent.GetUser().GetFullName(),-20} {taskEvent.Time,-20} {taskEvent.GetStatuses().FirstOrDefault(i => i.Value == taskEvent.Status).Key,-20} {taskEvent.Text,-20}"));
             }
         }
 
