@@ -1,4 +1,4 @@
-﻿namespace DesktopApplication.Engine
+﻿namespace DesktopApplication
 {
     public class Item<T>
     {

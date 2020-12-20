@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using DesktopApplication.Engine;
 
 namespace DesktopApplication.Clients
 {
@@ -34,7 +33,7 @@ namespace DesktopApplication.Clients
 
             Client.Save();
 
-            this.Redirect(new Show(Client));
+            this.Redirect(new Show(Client.LoadOne()));
         }
     }
 }

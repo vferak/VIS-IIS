@@ -20,19 +20,22 @@ namespace WebApplication.Controllers
         
         private IEnumerable<SelectListItem> GetRatesSelectList()
         {
-            return new Tasks(Connection).GetRates().Select(i => new SelectListItem
+            var result = new Tasks(Connection).GetRates().Select(i => new SelectListItem
             {
                 Value = i.Value.ToString(),
                 Text = i.Key
             }).ToList();
+
+            return result;
         }
         
-        private IEnumerable<SelectListItem> GetStatusesSelectList()
+        private IEnumerable<SelectListItem> GetStatusesSelectList(string status = null)
         {
             return new TasksEvents(Connection).GetStatuses().Select(i => new SelectListItem
             {
                 Value = i.Value.ToString(),
-                Text = i.Key
+                Text = i.Key,
+                Selected = status != null && status == i.Value
             }).ToList();
         }
         
@@ -58,7 +61,7 @@ namespace WebApplication.Controllers
 
             ViewBag.Task = task;
             ViewBag.TaskEvents = task.GetTasksEvents().Reverse();
-            ViewBag.Statuses = GetStatusesSelectList();
+            ViewBag.Statuses = GetStatusesSelectList(task.GetStatus());
             return View();
         }
 

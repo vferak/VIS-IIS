@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DomainLayer.Engine;
@@ -13,21 +14,21 @@ namespace DomainLayer.Models
         
         public DateTime? CreatedAt { get; set; }
 
-        [Required] public string Username { get; set; }
+        [Required] [DisplayName("Přihlašovací jméno")] public string Username { get; set; }
         
-        [Required] public string Password { get; set; }
+        [Required] [DisplayName("Heslo")] public string Password { get; set; }
 
-        [Required] public string FirstName { get; set; }
+        [Required] [DisplayName("Jméno")] public string FirstName { get; set; }
 
-        [Required] public string LastName { get; set; }
+        [Required] [DisplayName("Příjmení")] public string LastName { get; set; }
         
-        [Required] [EmailAddress] public string Email { get; set; }
+        [Required] [EmailAddress] [DisplayName("Email")] public string Email { get; set; }
         
-        public int? PhoneNumber { get; set; }
+        [DisplayName("Telefon")] public int? PhoneNumber { get; set; }
         
         public string IsManager { get; set; }
 
-        public int? SeniorModelId { get; set; }
+        [DisplayName("Nadřízený")] public int? SeniorModelId { get; set; }
         
         public string Deleted { get; set; }
 
@@ -48,6 +49,7 @@ namespace DomainLayer.Models
         {
             CreatedAt = DateTime.Now;
             Deleted = false.ToString().ToLower();
+            IsManager = false.ToString().ToLower();
             base.Save();
         }
 
@@ -70,25 +72,32 @@ namespace DomainLayer.Models
             return LoadOne().SeniorModelId != null;
         }
 
-        public IEnumerable<Users> LoadSeniors()
+        public List<Users> LoadSeniors()
         {
-            return Load().Where(user => !HasSeniorAssigned()).ToList();
+            return Load().Where(user => !user.HasSeniorAssigned()).ToList();
+        }
+
+        public Users GetSenior()
+        {
+            return SeniorModelId == null ? null : new Users(Connection) {ModelId = SeniorModelId}.LoadOne();
         }
         
         private void AssignTasksToSenior()
         {
-            var tasks = new Tasks(Connection) { ClientModelId = ModelId } .Load();
+            var tasks = new Tasks(Connection) { UserModelId = ModelId } .Load();
 
             foreach (var task in tasks)
             {
+                var newestTask = task.GetNewestEvent();
+                
                 var taskEvent = new TasksEvents(Connection)
                 {
                     TaskModelId = task.ModelId,
                     UserModelId = SeniorModelId,
                     CreatedAt = DateTime.Now,
-                    Status = task.GetNewestEvent().Status,
+                    Status = newestTask == null ? TasksEvents.StatusInProgress : newestTask.Status,
                     Time = 0,
-                    Text = "Přenos na seniora"
+                    Text = "Předáno na kolegu"
                 };
                 
                 task.AddTaskEvent(taskEvent);
@@ -99,6 +108,11 @@ namespace DomainLayer.Models
         {
             IsManager = true.ToString().ToLower();
             base.Save();
+        }
+
+        public bool Manager()
+        {
+            return IsManager == true.ToString().ToLower();
         }
     }
 }

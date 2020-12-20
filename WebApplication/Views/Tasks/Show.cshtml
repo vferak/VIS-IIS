@@ -12,6 +12,8 @@
         <div class="card">
             <div class="card-header">
                 <h2>@task.Title</h2>
+                <p>Reálný čas: <strong>@task.GetRealTime()</strong></p>
+                <p>Očekávaný čas: <strong>@task.ExpectedTime</strong></p>
             </div>
         </div>
     </div>
@@ -48,7 +50,7 @@
 
 @foreach (var taskEvent in taskEvents)
 {
-    <div class="row">
+    <div class="row mt-4">
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">

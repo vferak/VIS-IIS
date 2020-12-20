@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using DesktopApplication.Engine;
 
 namespace DesktopApplication.Tasks
 {
@@ -48,7 +47,8 @@ namespace DesktopApplication.Tasks
         private void button1_Click(object sender, EventArgs e)
         {
             Task ??= new DomainLayer.Models.Tasks(Program.Connection);
-            
+
+            Task.UserModelId ??= Program.LoggedUserId;
             Task.ClientModelId = ((Item<DomainLayer.Models.Clients>)clientComboBox.SelectedItem)?.Model.ModelId;
             Task.Title = titleTextBox.Text;
             Task.ExpectedTime = int.Parse(expectedTimeTextBox.Text);
@@ -57,7 +57,7 @@ namespace DesktopApplication.Tasks
 
             Task.Save();
 
-            this.Redirect(new Show(Task));
+            this.Redirect(new Show(Task.LoadOne()));
         }
     }
 }

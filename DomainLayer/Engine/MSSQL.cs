@@ -51,6 +51,11 @@ namespace DomainLayer.Engine
             }
         }
 
+        public void RunProcedure(string procedureName)
+        {
+            ExecuteNonQuery(GetSqlCommandWithProcedure(procedureName));
+        }
+        
         private SqlCommand GetSqlCommandWithParameters(string query)
         {
             var command = new SqlCommand(query, _connection);
@@ -219,11 +224,6 @@ namespace DomainLayer.Engine
             {
                 _connection.Close();
             }
-        }
-        
-        public void RunProcedure(string procedureName)
-        {
-            ExecuteNonQuery(GetSqlCommandWithProcedure(procedureName));
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel;
 
-namespace DesktopApplication
+namespace DesktopApplication.Users
 {
-    partial class Home
+    partial class Index
     {
         /// <summary> 
         /// Required designer variable.
@@ -31,43 +31,43 @@ namespace DesktopApplication
         /// </summary>
         private void InitializeComponent()
         {
+            this.listBox = new System.Windows.Forms.ListBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
+            // 
+            // listBox
+            // 
+            this.listBox.FormattingEnabled = true;
+            this.listBox.Location = new System.Drawing.Point(0, 39);
+            this.listBox.Name = "listBox";
+            this.listBox.Size = new System.Drawing.Size(800, 381);
+            this.listBox.TabIndex = 0;
+            this.listBox.DoubleClick += new System.EventHandler(this.listBox_DoubleClick);
             // 
             // label1
             // 
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
-            this.label1.Location = new System.Drawing.Point(3, 78);
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
+            this.label1.Location = new System.Drawing.Point(322, 11);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(797, 59);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Interní informační systém - IIS";
+            this.label1.Size = new System.Drawing.Size(138, 25);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "Uživatelé";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // label2
-            // 
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte) (238)));
-            this.label2.Location = new System.Drawing.Point(3, 137);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(797, 23);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Vývoj informačních systémů, Vojtěch Ferák - FER0101";
-            this.label2.TextAlign = System.Drawing.ContentAlignment.TopCenter;
-            // 
-            // Home
+            // Index
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Name = "Home";
-            this.Size = new System.Drawing.Size(800, 420);
+            this.Controls.Add(this.listBox);
+            this.Name = "Index";
+            this.Size = new System.Drawing.Size(800, 426);
             this.ResumeLayout(false);
         }
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+
+        private System.Windows.Forms.ListBox listBox;
 
         #endregion
     }

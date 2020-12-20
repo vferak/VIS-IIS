@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows.Forms;
-using DesktopApplication.Engine;
 
 namespace DesktopApplication.Tasks
 {
@@ -18,6 +17,11 @@ namespace DesktopApplication.Tasks
             expectedTimeLabel.Text = task.ExpectedTime.ToString();
             expectedDateLabel.Text = task.ExpectedDate.ToString();
             rateLabel.Text = task.Rate.ToString();
+            
+            foreach (var taskEvent in new DomainLayer.Models.TasksEvents(Program.Connection){TaskModelId = task.ModelId}.Load())
+            {
+                eventsListBox.Items.Add(new Item<DomainLayer.Models.TasksEvents>(taskEvent, taskEvent.Status));
+            }
         }
 
 

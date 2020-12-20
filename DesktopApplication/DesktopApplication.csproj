@@ -11,16 +11,13 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Compile Update="Home.cs">
+      <Compile Update="Window.cs">
         <SubType>Form</SubType>
       </Compile>
       <Compile Update="Clients\Index.cs">
         <SubType>UserControl</SubType>
       </Compile>
       <Compile Update="Clients\Form.cs">
-        <SubType>UserControl</SubType>
-      </Compile>
-      <Compile Update="Engine\UserControlExtension.cs">
         <SubType>UserControl</SubType>
       </Compile>
       <Compile Update="Clients\Show.cs">
@@ -33,6 +30,30 @@
         <SubType>UserControl</SubType>
       </Compile>
       <Compile Update="Tasks\Show.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Users\Index.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Users\Form.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Users\Show.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="UsersVacations\Index.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="UsersVacations\Form.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="UsersVacations\Show.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="Home.cs">
+        <SubType>UserControl</SubType>
+      </Compile>
+      <Compile Update="UserControlExtension.cs">
         <SubType>UserControl</SubType>
       </Compile>
     </ItemGroup>

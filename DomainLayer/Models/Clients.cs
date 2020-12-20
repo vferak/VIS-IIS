@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DomainLayer.Engine;
@@ -12,15 +13,15 @@ namespace DomainLayer.Models
         
         public DateTime? CreatedAt { get; set; }
 
-        [Required] public string Name { get; set; }
+        [Required] [DisplayName("Název")] public string Name { get; set; }
 
-        [Required] public string ContactFirstName { get; set; }
+        [Required] [DisplayName("Jméno kontaktu")] public string ContactFirstName { get; set; }
 
-        [Required] public string ContactLastName { get; set; }
+        [Required] [DisplayName("Příjmení kontaktu")] public string ContactLastName { get; set; }
         
-        [Required] [EmailAddress] public string ContactEmail { get; set; }
+        [Required] [EmailAddress] [DisplayName("Email kontaktu")] public string ContactEmail { get; set; }
         
-        public int? ContactPhoneNumber { get; set; }
+        [DisplayName("Telefon kontaktu")] public int? ContactPhoneNumber { get; set; }
         
         public string Deleted { get; set; }
 

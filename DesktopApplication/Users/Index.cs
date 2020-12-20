@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace DesktopApplication.Tasks
+namespace DesktopApplication.Users
 {
     public partial class Index : UserControl
     {
@@ -9,9 +9,9 @@ namespace DesktopApplication.Tasks
         {
             InitializeComponent();
             
-            foreach (var task in new DomainLayer.Models.Tasks(Program.Connection).Load())
+            foreach (var user in new DomainLayer.Models.Users(Program.Connection).Load())
             {
-                listBox.Items.Add(new Item<DomainLayer.Models.Tasks>(task, task.Title));
+                listBox.Items.Add(new Item<DomainLayer.Models.Users>(user, user.GetFullName()));
             }
         }
 
@@ -19,8 +19,8 @@ namespace DesktopApplication.Tasks
         {
             if (listBox.SelectedItem == null) return;
             
-            var task = ((Item<DomainLayer.Models.Tasks>)listBox.SelectedItem).Model;
-            this.Redirect(new Show(task));
+            var user = ((Item<DomainLayer.Models.Users>)listBox.SelectedItem).Model;
+            this.Redirect(new Show(user));
         }
     }
 }

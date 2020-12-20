@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using DomainLayer.Engine;
@@ -14,7 +15,7 @@ namespace DomainLayer.Models
 
         [Key] public int? ModelId { get; set; }
 
-        [Required] public int? ClientModelId { get; set; }
+        [Required] [DisplayName("Klient")] public int? ClientModelId { get; set; }
         
         [Required] public int? UserModelId { get; set; }
         
@@ -22,13 +23,13 @@ namespace DomainLayer.Models
 
         public DateTime? ModifiedAt { get; set; }
 
-        [Required] public string Title { get; set; }
+        [Required] [DisplayName("Název")] public string Title { get; set; }
         
-        [Required] public int? ExpectedTime { get; set; }
+        [Required] [DisplayName("Očekávaný čas")] public int? ExpectedTime { get; set; }
         
-        [Required] public DateTime? ExpectedDate { get; set; }
+        [Required] [DisplayName("Očekávané datum")] public DateTime? ExpectedDate { get; set; }
         
-        [Required] public int? Rate { get; set; }
+        [Required] [DisplayName("Sazba")] public int? Rate { get; set; }
 
         public Tasks(Connection connection) : base(connection) {}
 
@@ -41,6 +42,16 @@ namespace DomainLayer.Models
             
             ModifiedAt = DateTime.Now;
             base.Save();
+        }
+        
+        public new void Delete()
+        {
+            foreach (var tasksEvent in GetTasksEvents())
+            {
+                tasksEvent.Delete();
+            }
+            
+            base.Delete();
         }
         
         public int GetRealTime()
@@ -88,6 +99,29 @@ namespace DomainLayer.Models
                 {"Implementační", RateImplementation},
                 {"Urgentní", RateUrgent}
             };
+        }
+
+        public string GetStatus(bool translated = false)
+        {
+            var newestEvent = GetNewestEvent();
+            var result = newestEvent?.Status;
+
+            if (translated)
+            {
+                result = newestEvent?.GetStatuses().FirstOrDefault(i => i.Value == result).Key;
+            }
+            
+            return result;
+        }
+
+        public Clients GetClient()
+        {
+            return new Clients(Connection) {ModelId = ClientModelId}.LoadOne();
+        }
+
+        public Users GetUser()
+        {
+            return new Users(Connection) { ModelId = UserModelId }.Database.LoadOne();
         }
     }
 }

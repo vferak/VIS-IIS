@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using DomainLayer.Engine;
 
@@ -7,9 +8,9 @@ namespace DomainLayer.Models
 {
     public class TasksEvents : Model<TasksEvents>
     {
-        const string StatusEntered = "entered";
-        const string StatusInProgress = "inProgress";
-        const string StatusFinished = "finished";
+        public const string StatusEntered = "entered";
+        public const string StatusInProgress = "inProgress";
+        public const string StatusFinished = "finished";
 
         [Key] public int? ModelId { get; set; }
         
@@ -19,11 +20,11 @@ namespace DomainLayer.Models
         
         public DateTime? CreatedAt { get; set; }
 
-        [Required] public string Status { get; set; }
+        [Required] [DisplayName("Status")] public string Status { get; set; }
         
-        [Required] public int? Time { get; set; }
+        [Required] [DisplayName("Strávený čas")] public int? Time { get; set; }
         
-        [Required] public string Text { get; set; }
+        [Required] [DisplayName("Popis")] public string Text { get; set; }
 
         public TasksEvents(Connection connection) : base(connection) {}
         

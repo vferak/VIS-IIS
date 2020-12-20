@@ -44,6 +44,7 @@ namespace DesktopApplication.Tasks
             this.expectedTimeLabel = new System.Windows.Forms.Label();
             this.expectedDateLabel = new System.Windows.Forms.Label();
             this.rateLabel = new System.Windows.Forms.Label();
+            this.eventsListBox = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
             // button1
@@ -78,7 +79,7 @@ namespace DesktopApplication.Tasks
             // 
             // label5
             // 
-            this.label5.Location = new System.Drawing.Point(297, 306);
+            this.label5.Location = new System.Drawing.Point(196, 175);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(100, 23);
             this.label5.TabIndex = 24;
@@ -86,7 +87,7 @@ namespace DesktopApplication.Tasks
             // 
             // label4
             // 
-            this.label4.Location = new System.Drawing.Point(297, 243);
+            this.label4.Location = new System.Drawing.Point(458, 175);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 23);
             this.label4.TabIndex = 23;
@@ -94,7 +95,7 @@ namespace DesktopApplication.Tasks
             // 
             // label3
             // 
-            this.label3.Location = new System.Drawing.Point(297, 173);
+            this.label3.Location = new System.Drawing.Point(458, 105);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(100, 23);
             this.label3.TabIndex = 22;
@@ -102,15 +103,15 @@ namespace DesktopApplication.Tasks
             // 
             // label2
             // 
-            this.label2.Location = new System.Drawing.Point(297, 107);
+            this.label2.Location = new System.Drawing.Point(196, 41);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(100, 23);
+            this.label2.Size = new System.Drawing.Size(412, 23);
             this.label2.TabIndex = 20;
             this.label2.Text = "Název";
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(297, 41);
+            this.label1.Location = new System.Drawing.Point(196, 105);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(100, 23);
             this.label1.TabIndex = 18;
@@ -118,43 +119,52 @@ namespace DesktopApplication.Tasks
             // 
             // clientLabel
             // 
-            this.clientLabel.Location = new System.Drawing.Point(297, 64);
+            this.clientLabel.Location = new System.Drawing.Point(196, 128);
             this.clientLabel.Name = "clientLabel";
             this.clientLabel.Size = new System.Drawing.Size(100, 23);
             this.clientLabel.TabIndex = 25;
             // 
             // titleLabel
             // 
-            this.titleLabel.Location = new System.Drawing.Point(297, 130);
+            this.titleLabel.Location = new System.Drawing.Point(196, 64);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(100, 23);
+            this.titleLabel.Size = new System.Drawing.Size(412, 23);
             this.titleLabel.TabIndex = 26;
             // 
             // expectedTimeLabel
             // 
-            this.expectedTimeLabel.Location = new System.Drawing.Point(297, 196);
+            this.expectedTimeLabel.Location = new System.Drawing.Point(458, 128);
             this.expectedTimeLabel.Name = "expectedTimeLabel";
             this.expectedTimeLabel.Size = new System.Drawing.Size(100, 23);
             this.expectedTimeLabel.TabIndex = 27;
             // 
             // expectedDateLabel
             // 
-            this.expectedDateLabel.Location = new System.Drawing.Point(297, 266);
+            this.expectedDateLabel.Location = new System.Drawing.Point(458, 198);
             this.expectedDateLabel.Name = "expectedDateLabel";
             this.expectedDateLabel.Size = new System.Drawing.Size(100, 23);
             this.expectedDateLabel.TabIndex = 28;
             // 
             // rateLabel
             // 
-            this.rateLabel.Location = new System.Drawing.Point(297, 329);
+            this.rateLabel.Location = new System.Drawing.Point(196, 198);
             this.rateLabel.Name = "rateLabel";
             this.rateLabel.Size = new System.Drawing.Size(100, 23);
             this.rateLabel.TabIndex = 29;
+            // 
+            // eventsListBox
+            // 
+            this.eventsListBox.FormattingEnabled = true;
+            this.eventsListBox.Location = new System.Drawing.Point(65, 232);
+            this.eventsListBox.Name = "eventsListBox";
+            this.eventsListBox.Size = new System.Drawing.Size(667, 173);
+            this.eventsListBox.TabIndex = 30;
             // 
             // Show
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.eventsListBox);
             this.Controls.Add(this.rateLabel);
             this.Controls.Add(this.expectedDateLabel);
             this.Controls.Add(this.expectedTimeLabel);
@@ -172,6 +182,8 @@ namespace DesktopApplication.Tasks
             this.Size = new System.Drawing.Size(800, 420);
             this.ResumeLayout(false);
         }
+
+        private System.Windows.Forms.ListBox eventsListBox;
 
         private System.Windows.Forms.Label clientLabel;
         private System.Windows.Forms.Label expectedDateLabel;

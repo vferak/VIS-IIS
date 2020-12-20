@@ -1,6 +1,6 @@
 ﻿using System.Windows.Forms;
 
-namespace DesktopApplication.Engine
+namespace DesktopApplication
 {
     internal static class UserControlExtension
     {

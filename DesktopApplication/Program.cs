@@ -10,6 +10,7 @@ namespace DesktopApplication
     static class Program
     {
         public static readonly Connection Connection = new XMLConnection();
+        public static readonly int LoggedUserId = 1;
         
         /// <summary>
         ///  The main entry point for the application.
@@ -20,7 +21,7 @@ namespace DesktopApplication
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Home());
+            Application.Run(new Window());
         }
     }
 }

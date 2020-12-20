@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 using DomainLayer.Engine;
@@ -15,11 +16,11 @@ namespace DomainLayer.Models
 
         public string IsAccepted { get; set; }
 
-        [Required] public DateTime? DateFrom { get; set; }
+        [Required] [DisplayName("Od")] public DateTime? DateFrom { get; set; }
 
-        [Required] public DateTime? DateTo { get; set; }
+        [Required] [DisplayName("Do")] public DateTime? DateTo { get; set; }
 
-        [Required] public string Text { get; set; }
+        [Required] [DisplayName("Text")] public string Text { get; set; }
 
         public UsersVacations(Connection connection) : base(connection) {}
 
@@ -43,6 +44,16 @@ namespace DomainLayer.Models
         {
             IsAccepted = true.ToString().ToLower();
             base.Save();
+        }
+
+        public bool Accepted()
+        {
+            return IsAccepted == true.ToString().ToLower();
+        }
+
+        public Users GetUser()
+        {
+            return new Users(Connection) {ModelId = UserModelId} .LoadOne();
         }
     }
 }
