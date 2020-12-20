@@ -10,6 +10,11 @@ namespace DesktopApplication.UsersVacations
         public Show(DomainLayer.Models.UsersVacations vacation)
         {
             InitializeComponent();
+
+            if (vacation.Accepted())
+            {
+                button2.Hide();
+            }
             
             Vacation = vacation;
             userLabel.Text = vacation.GetUser().GetFullName();
@@ -34,6 +39,12 @@ namespace DesktopApplication.UsersVacations
         {
             Vacation.Delete();
             this.Redirect(new Index());
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Vacation.Accept();
+            this.Redirect(new Show(Vacation));
         }
     }
 }
