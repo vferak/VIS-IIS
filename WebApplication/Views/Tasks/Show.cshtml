@@ -54,7 +54,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    @taskEvent.GetUser().GetFullName()
+                    @taskEvent.GetUser()?.GetFullName()
                     <span class="float-right">@taskEvent.Time minut</span>
                 </div>
                 <div class="card-body">

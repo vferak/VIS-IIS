@@ -23,11 +23,11 @@ namespace WebApplication
 
             if (Configuration.GetValue<string>("Database") == "MSSQL")
             {
-                services.AddScoped<Connection, MSSQLConnection>();
+                services.AddScoped<Connection>(provider => new MSSQLConnection("Server=*server*;Database=*database*;User ID=*userid*;Password=*password*;"));
             }
             else
             {
-                services.AddScoped<Connection, XMLConnection>();
+                services.AddScoped<Connection>(provider => new XMLConnection("..\\Data.xml"));
             }
 
             services.AddMvc(options => {

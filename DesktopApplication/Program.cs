@@ -9,7 +9,7 @@ namespace DesktopApplication
 {
     static class Program
     {
-        public static readonly Connection Connection = new MSSQLConnection();
+        public static readonly Connection Connection = new XMLConnection("..\\..\\..\\..\\Data.xml");
         public static readonly int LoggedUserId = 1;
         
         /// <summary>

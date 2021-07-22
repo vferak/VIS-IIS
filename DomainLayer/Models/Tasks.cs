@@ -95,7 +95,7 @@ namespace DomainLayer.Models
         {
             return new Dictionary<string, int>
             {
-                {"Standartní", RateStandard},
+                {"Standardní", RateStandard},
                 {"Implementační", RateImplementation},
                 {"Urgentní", RateUrgent}
             };
@@ -116,7 +116,7 @@ namespace DomainLayer.Models
 
         public Clients GetClient()
         {
-            return new Clients(Connection) {ModelId = ClientModelId}.LoadOne();
+            return new Clients(Connection) { ModelId = ClientModelId }.LoadOne();
         }
 
         public Users GetUser()

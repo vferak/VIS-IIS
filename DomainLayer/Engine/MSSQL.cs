@@ -9,14 +9,19 @@ namespace DomainLayer.Engine
 {
     public class MSSQL<T> : Database<T>
     {
-        private const string ConnectionString =
-            "Server=dbsys.cs.vsb.cz\\STUDENT;Database=fer0101;User ID=fer0101;Password=aZ1kPBvC9x;";
-
         private const string Schema = "IIS.";
         
-        private readonly SqlConnection _connection = new SqlConnection(ConnectionString);
+        private string _connectionString;
+
+        private SqlConnection _connection;
 
         public MSSQL(Model<T> model) : base(model) {}
+
+        public void SetConnectionString(string connectionString)
+        {
+            _connectionString = connectionString;
+            _connection = new SqlConnection(_connectionString);
+        }
         
         public override T LoadOne()
         {
@@ -183,7 +188,7 @@ namespace DomainLayer.Engine
 
                 while (reader.Read())
                 {
-                    var model = (T)Activator.CreateInstance(typeof(T), new MSSQLConnection());
+                    var model = (T)Activator.CreateInstance(typeof(T), new MSSQLConnection(_connectionString));
                     foreach (var property in typeof(T).GetProperties())
                     {
                         if (reader.GetSchemaTable().Rows.OfType<DataRow>()

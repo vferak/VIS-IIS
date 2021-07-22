@@ -9,12 +9,18 @@ namespace DomainLayer.Engine
 {
     public class XML<T> : Database<T>
     {
-        private const string FilePath = "..\\..\\..\\..\\Data.xml";
         private const string Root = "IIS";
         private const string Row = "Row";
         private const string IncrementId = "IncrementId";
+        
+        private string _filePath;
 
         public XML(Model<T> model) : base(model) {}
+
+        public void SetDataFilePath(string dataFilePath)
+        {
+            _filePath = dataFilePath;
+        }
         
         public override T LoadOne()
         {
@@ -86,10 +92,10 @@ namespace DomainLayer.Engine
             return xpath + whereString;
         }
 
-        private static XmlDocument GetXmlDocument()
+        private XmlDocument GetXmlDocument()
         {
             var xml = new XmlDocument();
-            xml.LoadXml(System.IO.File.ReadAllText(FilePath));
+            xml.LoadXml(System.IO.File.ReadAllText(_filePath));
 
             return xml;
         }
@@ -118,7 +124,7 @@ namespace DomainLayer.Engine
 
             foreach (XmlNode node in xml.SelectNodes(xpath))
             {
-                var model = (T)Activator.CreateInstance(typeof(T), new XMLConnection());
+                var model = (T)Activator.CreateInstance(typeof(T), new XMLConnection(_filePath));
                 
                 foreach (var property in typeof(T).GetProperties())
                 {
@@ -171,7 +177,7 @@ namespace DomainLayer.Engine
 
             node.AppendChild(rowNode);
             
-            xml.Save(FilePath);
+            xml.Save(_filePath);
         }
         
         private void ExecuteUpdate(string xpath)
@@ -198,7 +204,7 @@ namespace DomainLayer.Engine
                 valueNode.InnerText = value;
             }
 
-            xml.Save(FilePath);
+            xml.Save(_filePath);
         }
         
         private void ExecuteDelete(string xpath)
@@ -209,7 +215,7 @@ namespace DomainLayer.Engine
             
             node.ParentNode.RemoveChild(node);
             
-            xml.Save(FilePath);
+            xml.Save(_filePath);
         }
     }
 }

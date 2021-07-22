@@ -32,8 +32,8 @@
                             <td class="col-4">
                                 <a href="@Url.Action("Show", "Tasks", new {modelId = task.ModelId})">@task.Title</a>
                             </td>
-                            <td class="col-2">@task.GetClient().Name</td>
-                            <td class="col-2">@task.GetUser().GetFullName()</td>
+                            <td class="col-2">@task.GetClient()?.Name</td>
+                            <td class="col-2">@task.GetUser()?.GetFullName()</td>
                             <td class="col-2">@task.GetStatus(true)</td>
                             <td class="col-2">
                                 <div class="btn-group float-right" role="group">

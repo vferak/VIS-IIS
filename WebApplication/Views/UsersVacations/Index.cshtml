@@ -30,7 +30,7 @@
                     @foreach (var userVacation in usersVacations)
                     {
                         <tr class="d-flex">
-                            <td class="col-2">@userVacation.GetUser().GetFullName()</td>
+                            <td class="col-2">@userVacation.GetUser()?.GetFullName()</td>
                             <td class="col-1">@userVacation.DateFrom.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                             <td class="col-1">@userVacation.DateTo.GetValueOrDefault().ToString("dd/MM/yyyy")</td>
                             <td class="col-5">
